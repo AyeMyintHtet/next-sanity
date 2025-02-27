@@ -23,7 +23,7 @@ export const postType = defineType({
         rule.required().custom(async (slug, context) => {
           const existing = await context
             .getClient({apiVersion: '2025-02-20'})
-            .fetch(`*[_type == "post" && slug.current == $slug]{_id}`, { slug: slug.current });
+            .fetch(`*[_type == "post" && slug.current == $slug]{_id}`, { slug: slug?.current });
 
           return existing.length > 0 ? "Slug must be unique" : true;
         }),
